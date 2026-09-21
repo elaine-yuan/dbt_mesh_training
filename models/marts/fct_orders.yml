@@ -1,10 +1,13 @@
 models:
   - name: fct_orders
-    latest_version: 1 ##Call out which version will be the default version when running this model
+    latest_version: 1
     access: public
+    group: finance
+
     config:
       contract:
         enforced: true
+
     columns:
       - name: order_id
         data_type: varchar
@@ -32,16 +35,17 @@ models:
         data_type: number
       - name: ordered_year
         data_type: number
-    versions: ###Add versioning section defining each version and listing changes to contract
+
+    versions:
       - v: 1
-          ##Matches above! Nothing more needed
         config:
-            alias: fct_orders
+          alias: fct_orders
+
       - v: 2
         columns:
-          - name: order_amount ##v2 Adds in new column name and date type change
+          - name: order_amount
             data_type: number
           - name: location_opened_at
             data_type: date
-          - include: all #Includes all other fields
-            exclude: [order_total] #But removes the old name of order_total
+          - include: all
+            exclude: [order_total]
